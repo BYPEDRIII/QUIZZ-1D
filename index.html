@@ -1,0 +1,151 @@
+<html>
+<head>
+    <title>Quiz sobre Animals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-2xl font-bold mb-4">Quiz sobre Animals</h1>
+         <p class="text-sm text-gray-500 mb-4">Fet per: Pedro Jairo Jonatan Dijali</p>
+         <div id="settings-container" class="mb-4">
+            <label for="timer-duration" class="block text-lg font-semibold mb-2">Selecciona el temps del temporitzador (segons):</label>
+            <input type="number" id="timer-duration" class="border border-gray-300 rounded py-2 px-4 w-full" value="10" min="5" max="60">
+        </div>
+        <div id="quiz-container">
+            <div id="question-container" class="mb-4">
+                <p id="question" class="text-lg font-semibold"></p>
+            </div>
+            <div id="options-container" class="mb-4">
+                <button class="option bg-blue-500 text-white py-2 px-4 rounded mb-2 w-full">A</button>
+                <button class="option bg-blue-500 text-white py-2 px-4 rounded mb-2 w-full">B</button>
+                <button class="option bg-blue-500 text-white py-2 px-4 rounded mb-2 w-full">C</button>
+            </div>
+            <div id="timer" class="text-red-500 font-bold mb-4">Temps restant: <span id="time">10</span> segons</div>
+            <div id="score" class="text-green-500 font-bold mb-4">Correctes: <span id="correct">0</span> | Incorrectes: <span id="incorrect">0</span></div>
+        </div>
+        <button id="start-btn" class="bg-green-500 text-white py-2 px-4 rounded w-full">Començar</button>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "Quin tipus d'animal és un peix?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
+            { question: "Quin tipus d'animal és una estrella de mar?", options: ["A. Artròpode", "B. Equinoderm", "C. Molusc"], answer: "B" },
+            { question: "Quin tipus d'animal és una papallona?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
+            { question: "Quin tipus d'animal és un calamar?", options: ["A. Equinoderm", "B. Molusc", "C. Vertebrat"], answer: "B" },
+            { question: "Quin tipus d'animal és un cranc?", options: ["A. Artròpode", "B. Molusc", "C. Equinoderm"], answer: "A" },
+            { question: "Quin tipus d'animal és un eriçó de mar?", options: ["A. Molusc", "B. Equinoderm", "C. Artròpode"], answer: "B" },
+            { question: "Quin tipus d'animal és una serp?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
+            { question: "Quin tipus d'animal és una medusa?", options: ["A. Equinoderm", "B. Molusc", "C. Invertebrat"], answer: "C" },
+            { question: "Quin tipus d'animal és un cargol?", options: ["A. Molusc", "B. Artròpode", "C. Vertebrat"], answer: "A" },
+            { question: "Quin tipus d'animal és una aranya?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
+            { question: "Quin tipus d'animal és un cavallet de mar?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
+            { question: "Quin tipus d'animal és una ostra?", options: ["A. Molusc", "B. Artròpode", "C. Equinoderm"], answer: "A" },
+            { question: "Quin tipus d'animal és un escarabat?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
+            { question: "Quin tipus d'animal és un peix globus?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
+            { question: "Quin tipus d'animal és una estrella de mar?", options: ["A. Artròpode", "B. Equinoderm", "C. Molusc"], answer: "B" },
+            { question: "Quin tipus d'animal és una llagosta?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
+            { question: "Quin tipus d'animal és un pop?", options: ["A. Equinoderm", "B. Molusc", "C. Vertebrat"], answer: "B" },
+            { question: "Quin tipus d'animal és un cranc de riu?", options: ["A. Artròpode", "B. Molusc", "C. Equinoderm"], answer: "A" },
+            { question: "Quin tipus d'animal és un eriçó de terra?", options: ["A. Molusc", "B. Equinoderm", "C. Vertebrat"], answer: "C" },
+            { question: "Quin tipus d'animal és una serp marina?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let timer;
+        let timeLeft;
+        let timerDuration = 10;
+
+        function startQuiz() {
+            timerDuration = parseInt($('#timer-duration').val());
+            $('#settings-container').hide();
+            $('#start-btn').hide();
+            $('#quiz-container').show();
+            showQuestion();
+            startTimer();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestionIndex];
+            $('#question').text(question.question);
+            const options = $('#options-container').children();
+            for (let i = 0; i < options.length; i++) {
+                $(options[i]).text(question.options[i]);
+            }
+        }
+
+        function startTimer() {
+            timeLeft = timerDuration;
+            $('#time').text(timeLeft);
+            timer = setInterval(() => {
+                timeLeft--;
+                $('#time').text(timeLeft);
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    showCorrectAnswer();
+                    incorrectAnswers++;
+                    $('#incorrect').text(incorrectAnswers);
+                    setTimeout(nextQuestion, 2000);
+                }
+            }, 1000);
+        }
+
+        function showCorrectAnswer() {
+            const correctOption = questions[currentQuestionIndex].answer;
+            $('.option').each(function() {
+                if ($(this).text().charAt(0) === correctOption) {
+                    $(this).addClass('bg-green-500');
+                } else {
+                    $(this).addClass('bg-red-500');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                $('.option').removeClass('bg-green-500 bg-red-500');
+                showQuestion();
+                startTimer();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function endQuiz() {
+            $('#quiz-container').hide();
+            $('#start-btn').text('Reiniciar').show();
+            $('#settings-container').show();
+        }
+
+        $(document).ready(function() {
+            $('#quiz-container').hide();
+            $('#start-btn').click(startQuiz);
+
+            $('.option').click(function() {
+                clearInterval(timer);
+                const selectedOption = $(this).text().charAt(0);
+                const correctOption = questions[currentQuestionIndex].answer;
+                if (selectedOption === correctOption) {
+                    correctAnswers++;
+                    $('#correct').text(correctAnswers);
+                } else {
+                    incorrectAnswers++;
+                    $('#incorrect').text(incorrectAnswers);
+                }
+                showCorrectAnswer();
+                setTimeout(nextQuestion, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
