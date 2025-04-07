@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Quiz sobre Animals</title>
+    <title>Quiz sobre Invertebrats</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -13,9 +13,9 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h1 class="text-2xl font-bold mb-4">Quiz sobre Animals</h1>
-         <p class="text-sm text-gray-500 mb-4">Fet per: Pedro Jairo Jonatan Dijali</p>
-         <div id="settings-container" class="mb-4">
+        <h1 class="text-2xl font-bold mb-4">Quiz sobre Invertebrats</h1>
+        <p class="text-sm text-gray-500 mb-4">Fet per: Pedro Jairo Jonatan Dijali</p>
+        <div id="settings-container" class="mb-4">
             <label for="timer-duration" class="block text-lg font-semibold mb-2">Selecciona el temps del temporitzador (segons):</label>
             <input type="number" id="timer-duration" class="border border-gray-300 rounded py-2 px-4 w-full" value="10" min="5" max="60">
         </div>
@@ -36,26 +36,26 @@
 
     <script>
         const questions = [
-            { question: "Quin tipus d'animal és una medusa?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
-            { question: "Quin tipus d'animal és una estrella de mar?", options: ["A. Artròpode", "B. Equinoderm", "C. Molusc"], answer: "B" },
-            { question: "Quin tipus d'animal és una papallona?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
-            { question: "Quin tipus d'animal és un calamar?", options: ["A. Equinoderm", "B. Molusc", "C. Vertebrat"], answer: "B" },
-            { question: "Quin tipus d'animal és un cranc?", options: ["A. Artròpode", "B. Molusc", "C. Equinoderm"], answer: "A" },
-            { question: "Quin tipus d'animal és un eriçó de mar?", options: ["A. Molusc", "B. Equinoderm", "C. Artròpode"], answer: "B" },
-            { question: "Quin tipus d'animal és una serp?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
-            { question: "Quin tipus d'animal és una medusa?", options: ["A. Equinoderm", "B. Molusc", "C. Invertebrat"], answer: "C" },
-            { question: "Quin tipus d'animal és un cargol?", options: ["A. Molusc", "B. Artròpode", "C. Vertebrat"], answer: "A" },
-            { question: "Quin tipus d'animal és una aranya?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
-            { question: "Quin tipus d'animal és un cavallet de mar?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
-            { question: "Quin tipus d'animal és una ostra?", options: ["A. Molusc", "B. Artròpode", "C. Equinoderm"], answer: "A" },
-            { question: "Quin tipus d'animal és un escarabat?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
-            { question: "Quin tipus d'animal és un peix globus?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" },
-            { question: "Quin tipus d'animal és una estrella de mar?", options: ["A. Artròpode", "B. Equinoderm", "C. Molusc"], answer: "B" },
-            { question: "Quin tipus d'animal és una llagosta?", options: ["A. Artròpode", "B. Molusc", "C. Vertebrat"], answer: "A" },
-            { question: "Quin tipus d'animal és un pop?", options: ["A. Equinoderm", "B. Molusc", "C. Vertebrat"], answer: "B" },
-            { question: "Quin tipus d'animal és un cranc de riu?", options: ["A. Artròpode", "B. Molusc", "C. Equinoderm"], answer: "A" },
-            { question: "Quin tipus d'animal és un eriçó de terra?", options: ["A. Molusc", "B. Equinoderm", "C. Vertebrat"], answer: "C" },
-            { question: "Quin tipus d'animal és una serp marina?", options: ["A. Vertebrat", "B. Invertebrat", "C. Molusc"], answer: "A" }
+            { question: "Quin d'aquests és un invertebrat?", options: ["A. Cranc", "B. Gos", "C. Llangardaix"], answer: "A" },
+            { question: "Com respiren la majoria dels insectes?", options: ["A. Brànquies", "B. Pulmons", "C. Traquees"], answer: "C" },
+            { question: "Quin d’aquests animals no té columna vertebral?", options: ["A. Pop", "B. Peix", "C. Tortuga"], answer: "A" },
+            { question: "A quin grup pertany l’estrella de mar?", options: ["A. Artròpodes", "B. Equinoderms", "C. Cnidaris"], answer: "B" },
+            { question: "Quin d’aquests és un mol·lusc?", options: ["A. Cargol", "B. Escarabat", "C. Medusa"], answer: "A" },
+            { question: "Les aranyes són...", options: ["A. Insectes", "B. Anèl·lids", "C. Artròpodes"], answer: "C" },
+            { question: "Quin invertebrat construeix teranyines?", options: ["A. Abella", "B. Aranya", "C. Formiga"], answer: "B" },
+            { question: "Quants potes tenen els insectes?", options: ["A. 6", "B. 8", "C. 4"], answer: "A" },
+            { question: "On viu normalment una medusa?", options: ["A. A la sorra", "B. A l'aigua dolça", "C. A l'oceà"], answer: "C" },
+            { question: "Quin d’aquests és un artròpode?", options: ["A. Pop", "B. Abella", "C. Estrella de mar"], answer: "B" },
+            { question: "Quin invertebrat té una closca en espiral?", options: ["A. Cargol", "B. Cranc", "C. Medusa"], answer: "A" },
+            { question: "Com es desplacen els cucs de terra?", options: ["A. Amb potes", "B. Arrossegant-se", "C. Amb ales"], answer: "B" },
+            { question: "Quin grup d'invertebrats té el cos tou i sovint una closca?", options: ["A. Mol·luscs", "B. Artròpodes", "C. Equinoderms"], answer: "A" },
+            { question: "Quin invertebrat pot tenir tentacles amb ventoses?", options: ["A. Pop", "B. Cranc", "C. Cargol"], answer: "A" },
+            { question: "Quin d’aquests invertebrats pot volar?", options: ["A. Medusa", "B. Mosquit", "C. Estrella de mar"], answer: "B" },
+            { question: "Quin grup d'invertebrats viu generalment al fons del mar i té simetria radial?", options: ["A. Equinoderms", "B. Artròpodes", "C. Insectes"], answer: "A" },
+            { question: "Quin d’aquests invertebrats té el cos segmentat?", options: ["A. Abella", "B. Cargol", "C. Cuc de terra"], answer: "C" },
+            { question: "Tots els invertebrats...", options: ["A. Tenen ossos", "B. No tenen columna vertebral", "C. Poden volar"], answer: "B" },
+            { question: "Quin d’aquests animals és un cnidari?", options: ["A. Medusa", "B. Cranc", "C. Cargol"], answer: "A" },
+            { question: "Els artròpodes tenen...", options: ["A. Pell nua", "B. Exoesquelet", "C. Escates"], answer: "B" }
         ];
 
         let currentQuestionIndex = 0;
